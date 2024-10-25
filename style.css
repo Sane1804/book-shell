@@ -1,0 +1,49 @@
+html {
+    box-sizing: border-box;
+    height: 100%;
+}
+
+
+*,
+::after,
+::before {
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    background-color: green;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-areas: ". form ."
+                         "content content content"
+                         "content content content"
+                         "content content content";
+}
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid white;
+    gap: 20px;
+    max-width: 400px;
+    grid-area: form;
+}
+
+.content {
+    grid-area: content;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+input {
+    display: block;
+}
