@@ -1,6 +1,5 @@
 html {
     box-sizing: border-box;
-    height: 100%;
 }
 
 
@@ -17,11 +16,13 @@ body {
     background-color: green;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: 0.5fr 1fr;
     grid-template-areas: ". form ."
                          "content content content"
                          "content content content"
                          "content content content";
+                         
+    padding: 10px;
 }
 
 
@@ -31,7 +32,6 @@ body {
     align-items: center;
     border: 1px solid white;
     gap: 20px;
-    max-width: 400px;
     grid-area: form;
 }
 
@@ -46,4 +46,16 @@ body {
 
 input {
     display: block;
+}
+
+.books-container {
+    border: 1px solid white;
+    flex:1;
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.book-card {
+    border: 1px solid black;
 }
