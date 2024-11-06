@@ -3,22 +3,32 @@ const FORM = document.querySelector(".form")
 const BOOKS_CONTAINER = document.querySelector(".books-container");
 
 
-let myLibrary = [{title: "My first Book", author: "Sane", pages: "199", read: false}];
+let myLibrary = [];
 
 
 const displayBooks = (books) => {
     BOOKS_CONTAINER.innerHTML = "";
     let library = books;
     for(let i = 0; i < library.length; i++){
-        
+        // Create card and its children
         let card = document.createElement("div");
         let title = document.createElement("h3");
         let author = document.createElement("p");
         let pages = document.createElement("p");
-        let read = document.createElement("p");  
-
+        let read = document.createElement("p");
+        
+        read.addEventListener("click", (e) => {
+            let target = e.target;
+            if (target.textContent === "read") {
+                target.textContent = "not read";
+            } else {
+                target.textContent = "read";
+            }
+        })
+        read.className = "read-book";
         card.className = "book-card";
 
+        //Assign text content to each children's card elem
         for(let key in library[i]){
             
             if (key == "title"){
@@ -31,13 +41,14 @@ const displayBooks = (books) => {
                 let textContent = document.createTextNode(`pages: ${library[i][key]}`)
                 pages.appendChild(textContent);
             } else {
-                let text = library[i][key] ? "read" : "not read";
+                let text = library[i][key] == "true" ? "read" : "not read";
                 let textContent = document.createTextNode(text)
                 read.appendChild(textContent);
             }
-            
         }
+        // Appending children to card
         card.append(title, author, pages, read);
+        //Displaying card
         BOOKS_CONTAINER.appendChild(card);
     }
 }
@@ -54,13 +65,10 @@ function Book(title, author, pages, read){
 const addBookToLibrary = () => {
     let arr = [];
     for (let i = 0; i < FORM.elements.length-1; i++){
-        if (FORM.elements[i].type === "checkbox"){
-        if (FORM.elements[i].checked){
-            FORM.elements[i].value = true;
-        } else {
-            FORM.elements[i].value = false;
+        //Making checkbox value to be true/false base on if checked or not
+        if (FORM.elements[i].type == "checkbox"){
+            FORM.elements[i].value = FORM.elements[i].checked;
         }
-       }
         arr.push(FORM.elements[i].value)
     }
 
